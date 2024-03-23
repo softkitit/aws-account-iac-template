@@ -5,7 +5,7 @@
 
 module "terraform_state_backend" {
   source     = "cloudposse/tfstate-backend/aws"
-  version    = "v1.4.0"
+  version    = "1.4.1"
   namespace  = var.github_org_name
   stage      = var.repository_name
   name       = var.repository_name
