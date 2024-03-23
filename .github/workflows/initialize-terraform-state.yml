@@ -1,0 +1,71 @@
+name: "Initialize terraform state"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  init_state:
+    uses: softkitit/github-actions-terraform/.github/workflows/controller-initialize-terraform-state.yml@main
+    with:
+      repository: ${{ github.event.repository.name }}
+      organization: ${{ github.event.repository.owner.login }}
+      awsRegion: ${{ inputs.awsRegion }}
+      awsAccessKeyId: ${{ inputs.awsAccessKeyId }}
+      awsSecretAccessKey: ${{ inputs.awsSecretAccessKey }}
+      awsSessionToken: ${{ inputs.awsSessionToken }}
+      environment: ${{ inputs.environment }}
+    secrets: inherit
+
+on:
+  workflow_dispatch:
+    inputs:
+      awsAccessKeyId:
+        description: "AWS Access Key ID"
+        required: true
+      awsSecretAccessKey:
+        description: "AWS Secret Access Key"
+        required: true
+      awsSessionToken:
+        description: "AWS Session Token"
+        required: true
+      awsRegion:
+        description: "AWS Region"
+        type: choice
+        default: eu-central-1
+        options:
+          - af-south-1
+          - ap-east-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-south-1
+          - ap-south-2
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-southeast-3
+          - ap-southeast-4
+          - ca-central-1
+          - ca-west-1
+          - eu-central-1
+          - eu-central-2
+          - eu-north-1
+          - eu-south-1
+          - eu-south-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - il-central-1
+          - me-central-1
+          - me-south-1
+          - sa-east-1
+          - us-east-1
+          - us-east-2
+          - us-gov-east-1
+          - us-gov-west-1
+          - us-west-1
+          - us-west-2
+        required: true
+      environment:
+        description: "Environment name (master, prod, dev, security, etc...)"
+        required: true

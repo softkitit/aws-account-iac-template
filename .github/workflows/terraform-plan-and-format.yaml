@@ -1,0 +1,28 @@
+name: Terraform plan and format
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [ opened, reopened, synchronize, labeled ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to apply changes to"
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+
+jobs:
+  plan_and_format:
+    uses: softkitit/github-actions-terraform/.github/workflows/ci-terraform-plan-and-format.yaml@main
+    with:
+      environment: ${{ inputs.environment || 'dev' }}
+    secrets: inherit
