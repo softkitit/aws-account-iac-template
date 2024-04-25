@@ -2,6 +2,7 @@ name: "Initialize terraform state"
 
 permissions:
   contents: write
+  id-token: write
   pull-requests: write
 
 jobs:
@@ -14,6 +15,7 @@ jobs:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
       aws-session-token: ${{ inputs.aws-session-token }}
+      push-mode: "pull-request"
       environment: ${{ inputs.environment }}
     secrets: inherit
 

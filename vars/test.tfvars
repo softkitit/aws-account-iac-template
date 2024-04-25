@@ -1,0 +1,7 @@
+environment = "test"
+aws_region = "eu-central-1"
+project_name = "aws-account-iac-template"
+org_name = "softkitit"
+tf_state_file_name = "test-aws-account-iac-template-terraform.tfstate"
+dynamo_db_table_name = "test-softkitit-aws-account-iac-template"
+s3_bucket_name = "test-softkitit-aws-account-iac-template"
