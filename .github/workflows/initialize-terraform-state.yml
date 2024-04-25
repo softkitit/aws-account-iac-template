@@ -8,28 +8,28 @@ jobs:
   init_state:
     uses: softkitit/github-actions-terraform/.github/workflows/controller-initialize-terraform-state.yml@main
     with:
-      repository: ${{ github.event.repository.name }}
+      project-name: ${{ github.event.repository.name }}
       organization: ${{ github.event.repository.owner.login }}
-      awsRegion: ${{ inputs.awsRegion }}
-      awsAccessKeyId: ${{ inputs.awsAccessKeyId }}
-      awsSecretAccessKey: ${{ inputs.awsSecretAccessKey }}
-      awsSessionToken: ${{ inputs.awsSessionToken }}
+      aws-region: ${{ inputs.aws-region }}
+      aws-access-key-id: ${{ inputs.aws-access-key-id }}
+      aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+      aws-session-token: ${{ inputs.aws-session-token }}
       environment: ${{ inputs.environment }}
     secrets: inherit
 
 on:
   workflow_dispatch:
     inputs:
-      awsAccessKeyId:
+      aws-access-key-id:
         description: "AWS Access Key ID"
         required: true
-      awsSecretAccessKey:
+      aws-secret-access-key:
         description: "AWS Secret Access Key"
         required: true
-      awsSessionToken:
+      aws-session-token:
         description: "AWS Session Token"
         required: true
-      awsRegion:
+      aws-region:
         description: "AWS Region"
         type: choice
         default: eu-central-1
