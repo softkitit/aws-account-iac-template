@@ -4,8 +4,8 @@
 # https://github.com/cloudposse/terraform-aws-tfstate-backend#usage
 
 module "terraform_state_backend" {
-  source     = "cloudposse/tfstate-backend/aws"
-  version    = "v1.4.0"
+  source  = "cloudposse/tfstate-backend/aws"
+  version = "v1.4.0"
   context = module.this.context
 
   dynamodb_table_name                = var.dynamo_db_table_name
