@@ -1,7 +1,7 @@
 name: Terraform plan and format
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
   id-token: write
 
@@ -9,20 +9,24 @@ on:
   pull_request:
     branches:
       - main
-    types: [ opened, reopened, synchronize, labeled ]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: "Environment to apply changes to"
-        required: true
-        type: choice
-        options:
-          - dev
-          - prod
+    types: [ opened, reopened, synchronize ]
+
+env:
+  ENVIRONMENT: ${{ inputs.environment || 'test' }}
 
 jobs:
+  init_state:
+    uses: softkitit/github-actions-terraform/.github/workflows/controller-initialize-terraform-state.yml@main
+    with:
+      organization: ${{ github.event.repository.owner.login }}
+      project-name: ${{ github.event.repository.name }}-new
+      environment: ${{ env.ENVIRONMENT }}
+    secrets: inherit
+
   plan_and_format:
+    needs: init_state
     uses: softkitit/github-actions-terraform/.github/workflows/ci-terraform-plan-and-format.yaml@main
     with:
-      environment: ${{ inputs.environment || 'dev' }}
+      environment: ${{ env.ENVIRONMENT }}
+      override-plan-comment: ${{ env.ENVIRONMENT == 'test' }}
     secrets: inherit
