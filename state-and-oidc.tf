@@ -15,16 +15,3 @@ module "terraform_state_backend" {
   terraform_backend_config_file_name = ""
   force_destroy                      = var.force_destroy
 }
-
-
-
-module "oidc_github" {
-  source  = "unfunco/oidc-github/aws"
-  version = "1.7.1"
-
-  attach_admin_policy = true
-
-  github_repositories = [
-    "${var.org_name}/${var.project_name}"
-  ]
-}
