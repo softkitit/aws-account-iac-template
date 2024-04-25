@@ -11,22 +11,19 @@ on:
       - main
     types: [ opened, reopened, synchronize ]
 
-env:
-  ENVIRONMENT: ${{ inputs.environment || 'test' }}
-
 jobs:
   init_state:
     uses: softkitit/github-actions-terraform/.github/workflows/controller-initialize-terraform-state.yml@main
     with:
       organization: ${{ github.event.repository.owner.login }}
       project-name: ${{ github.event.repository.name }}-new
-      environment: ${{ env.ENVIRONMENT }}
+      environment: 'test'
     secrets: inherit
 
   plan_and_format:
     needs: init_state
     uses: softkitit/github-actions-terraform/.github/workflows/ci-terraform-plan-and-format.yaml@main
     with:
-      environment: ${{ env.ENVIRONMENT }}
-      override-plan-comment: ${{ env.ENVIRONMENT == 'test' }}
+      environment: 'test'
+      override-plan-comment: false
     secrets: inherit
