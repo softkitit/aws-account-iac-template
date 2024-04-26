@@ -1,6 +1,0 @@
-region         = ""
-bucket         = "test-softkitit-aws-account-iac-template-new"
-key            = "test-aws-account-iac-template-new-terraform.tfstate"
-profile        = ""
-encrypt        = "true"
-dynamodb_table = "test-softkitit-aws-account-iac-template-new"
