@@ -5,9 +5,10 @@
 
 module "terraform_state_backend" {
   source  = "cloudposse/tfstate-backend/aws"
-  version = "v1.4.0"
+  version = "v1.4.1"
   context = module.this.context
 
+  deletion_protection_enabled        = true
   dynamodb_table_name                = var.dynamo_db_table_name
   s3_bucket_name                     = var.s3_bucket_name
   terraform_state_file               = var.tf_state_file_name
@@ -23,6 +24,6 @@ module "oidc_github" {
   attach_admin_policy = true
 
   github_repositories = [
-    "${var.org_name}/${var.project_name}"
+    "${var.org_name}/*"
   ]
 }

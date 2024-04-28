@@ -13,6 +13,11 @@ variable "org_name" {
   description = "Organisation name for labels and other generalized metadata and naming"
 }
 
+variable "repository_name" {
+  type        = string
+  description = "Git repository name, to understand where the particular resource is managed"
+}
+
 variable "project_name" {
   type        = string
   description = "For monorepo choose the appropriate name for project (usually a folder where project is located) for poly repo use repository name)"
