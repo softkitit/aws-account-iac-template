@@ -7,6 +7,6 @@ module "this" {
   name        = var.project_name
 
   tags = {
-    "Repository" = var.project_name
+    "Repository" = var.repository_name
   }
 }
