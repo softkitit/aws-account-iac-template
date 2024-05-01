@@ -8,5 +8,6 @@ module "this" {
 
   tags = {
     "Repository" = var.repository_name
+    "Project" = var.project_name
   }
 }
